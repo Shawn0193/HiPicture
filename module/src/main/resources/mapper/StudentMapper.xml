@@ -3,15 +3,26 @@
 <mapper namespace="com.baidu.hipicture.module.mapper.PictureMapper">
 
     <insert id="insert" parameterType="com.baidu.hipicture.module.entity.Picture">
-        insert into picture (title, introduce, create_time, update_time, is_deleted)
-        values (#{picture.title}, #{picture.introduce}, #{picture.createTime}, #{picture.updateTime}, #{picture.isDeleted})
+        insert into picture (cover_pictures, title, introduce, user_name, category, width, height, size, create_time,
+                             update_time, is_deleted)
+        values (#{picture.coverPictures}, #{picture.title}, #{picture.introduce}, #{picture.userName},
+                #{picture.category},
+                #{picture.width}, #{picture.height}, #{picture.size}, #{picture.createTime}, #{picture.updateTime},
+                #{picture.isDeleted})
     </insert>
 
     <update id="update" parameterType="com.baidu.hipicture.module.entity.Picture">
-        update picture set title = #{picture.title},
-                           introduce = #{picture.introduce},
-                           update_time = #{picture.updateTime}
-        where id = #{student.id}
+        update picture
+        set cover_pictures = #{picture.coverPictures},
+            title         = #{picture.title},
+            introduce     = #{picture.introduce},
+            user_name      = #{picture.userName},
+            category      = #{picture.category},
+            width         = #{picture.width},
+            height        = #{picture.height},
+            size          = #{picture.size},
+            update_time   = #{picture.updateTime}
+        where id = #{picture.id}
     </update>
 
 </mapper>

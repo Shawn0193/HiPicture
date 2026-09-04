@@ -1,6 +1,8 @@
 package com.baidu.hipicture.app.controller;
 
 import com.baidu.hipicture.app.domain.PictureInfoVO;
+import com.baidu.hipicture.app.domain.PictureListFeedVo;
+import com.baidu.hipicture.app.domain.PictureListVO;
 import com.baidu.hipicture.module.entity.Picture;
 import com.baidu.hipicture.module.service.PictureService;
 import lombok.extern.slf4j.Slf4j;
@@ -46,29 +48,21 @@ public class PictureController {
     }
 
     @RequestMapping("/picture/list")
-    public List<Picture> getAllPictureList() {
-        return pictureService.getAllPictureList();
+    public PictureListVO getAllPictureList() {
+        List<Picture> picture = pictureService.getAllPictureList();
+        PictureListVO pictureListVO = new PictureListVO();
+        List<PictureListFeedVo> pictureListFeedVos = new ArrayList<>();
+        for (Picture picture1 : picture) {
+            PictureListFeedVo pictureListFeedVo = new PictureListFeedVo();
+            pictureListFeedVo.setPictureId(picture1.getId());
+            pictureListFeedVo.setPictureUrl(picture1.getCoverPictures().split("\\$")[0]);
+            pictureListFeedVo.setPictureName(picture1.getTitle());
+            pictureListFeedVos.add(pictureListFeedVo);
+            pictureListVO.setPictureListFeedVos(pictureListFeedVos);
+        }
+
+        return pictureListVO;
     }
 
-    @RequestMapping("/picture/create")
-    public String pictureCreate(@RequestParam(name = "title") String title,
-                                @RequestParam(name = "introduce") String introduce) {
-        int result = pictureService.createPicture(title, introduce);
-        return result == 1 ? "成功" : "失败";
-    }
-
-    @RequestMapping("/picture/update")
-    public String pictureUpdate(@RequestParam(name = "studentId") BigInteger studentId,
-                                @RequestParam(name = "title") String title,
-                                @RequestParam(name = "introduce") String introduce) {
-        int result = pictureService.updatePicture(studentId, title, introduce);
-        return result == 1 ? "成功" : "失败";
-    }
-
-    @RequestMapping("/picture/delete")
-    public String pictureDelete(@RequestParam(name = "pictureId") BigInteger pictureId) {
-        int result = pictureService.deletePicture(pictureId);
-        return result == 1 ? "成功" : "失败";
-    }
 
 }

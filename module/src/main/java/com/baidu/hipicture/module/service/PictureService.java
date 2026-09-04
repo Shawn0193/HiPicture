@@ -22,23 +22,35 @@ public class PictureService {
         return pictureMapper.getList();
     }
 
-    public int createPicture(String title, String introduce) {
+    public int createPicture(String coverPictures, String title, String introduce, String userName, String category, Integer width, Integer height, Integer size) {
         int timestamp = (int) (System.currentTimeMillis() / 1000);
         Picture picture = new Picture();
+        picture.setCoverPictures(coverPictures);
         picture.setTitle(title);
         picture.setIntroduce(introduce);
+        picture.setUserName(userName);
+        picture.setCategory(category);
+        picture.setWidth(width);
+        picture.setHeight(height);
+        picture.setSize(size);
         picture.setCreateTime(timestamp);
         picture.setUpdateTime(timestamp);
         picture.setIsDeleted(0);
         return pictureMapper.insert(picture);
     }
 
-    public int updatePicture(BigInteger id, String title, String introduce) {
+    public int updatePicture(BigInteger id, String coverPictures, String title, String introduce, String userName, String category, Integer width, Integer height, Integer size) {
         int timestamp = (int) (System.currentTimeMillis() / 1000);
         Picture picture = new Picture();
         picture.setId(id);
+        picture.setCoverPictures(coverPictures);
         picture.setTitle(title);
         picture.setIntroduce(introduce);
+        picture.setUserName(userName);
+        picture.setCategory(category);
+        picture.setWidth(width);
+        picture.setHeight(height);
+        picture.setSize(size);
         picture.setUpdateTime(timestamp);
         return pictureMapper.update(picture);
     }
