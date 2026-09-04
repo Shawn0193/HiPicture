@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.hipicture.module.mapper.PictureMapper">
+
+    <insert id="insert" parameterType="com.baidu.hipicture.module.entity.Picture">
+        insert into picture (title, introduce, create_time, update_time, is_deleted)
+        values (#{picture.title}, #{picture.introduce}, #{picture.createTime}, #{picture.updateTime}, #{picture.isDeleted})
+    </insert>
+
+    <update id="update" parameterType="com.baidu.hipicture.module.entity.Picture">
+        update picture set title = #{picture.title},
+                           introduce = #{picture.introduce},
+                           update_time = #{picture.updateTime}
+        where id = #{student.id}
+    </update>
+
+</mapper>
