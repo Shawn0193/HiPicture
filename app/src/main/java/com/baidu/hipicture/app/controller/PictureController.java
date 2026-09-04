@@ -58,7 +58,7 @@ public class PictureController {
             pictureListFeedVo.setPictureUrl(picture1.getCoverPictures().split("\\$")[0]);
             pictureListFeedVo.setPictureName(picture1.getTitle());
             pictureListFeedVos.add(pictureListFeedVo);
-            pictureListVO.setPictureListFeedVos(pictureListFeedVos);
+            pictureListVO.setList(pictureListFeedVos);
         }
 
         return pictureListVO;

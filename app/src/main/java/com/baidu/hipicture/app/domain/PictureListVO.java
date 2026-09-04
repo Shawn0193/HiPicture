@@ -9,5 +9,5 @@ import java.util.List;
 @Accessors(chain=true)
 public class PictureListVO {
 
-    private List<PictureListFeedVo> pictureListFeedVos;
+    private List<PictureListFeedVo> list;
 }
