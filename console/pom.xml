@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>red.mlz</groupId>
-        <artifactId>study</artifactId>
+        <groupId>com.baidu</groupId>
+        <artifactId>hi-picture</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -22,7 +22,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>red.mlz</groupId>
+            <groupId>com.baidu</groupId>
             <artifactId>module</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>

@@ -9,7 +9,7 @@ import java.math.BigInteger;
 @Accessors(chain=true)
 public class Picture {
 
-    private BigInteger id;
+    private Long id;
     private String coverPictures;
     private String title;
     private String introduce;
@@ -21,6 +21,5 @@ public class Picture {
     private Integer updateTime;
     private Integer createTime;
     private Integer isDeleted;
-
 
 }

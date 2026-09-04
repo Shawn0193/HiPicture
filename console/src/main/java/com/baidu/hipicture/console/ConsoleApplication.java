@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = "com.baidu.hipicture")
 @MapperScan("com.baidu.hipicture.module.mapper")
-public class ApiApplication {
+public class ConsoleApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ApiApplication.class, args);
+        SpringApplication.run(ConsoleApplication.class, args);
     }
 
 }

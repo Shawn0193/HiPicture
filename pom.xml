@@ -8,12 +8,12 @@
 		<version>2.7.15</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>red.mlz</groupId>
-	<artifactId>study</artifactId>
+	<groupId>com.baidu</groupId>
+	<artifactId>hi-picture</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>mingliangzuo</name>
-	<description>mingliangzuo</description>
+	<name>hi-picture</name>
+	<description>Software for handling images</description>
 
 	<dependencies>
 		<!-- Source: https://mvnrepository.com/artifact/org.projectlombok/lombok -->

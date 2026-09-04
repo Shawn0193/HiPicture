@@ -14,7 +14,7 @@ public class PictureService {
     @Resource
     private PictureMapper pictureMapper;
 
-    public Picture getPictureInfoById(BigInteger id) {
+    public Picture getPictureInfoById(Long id) {
         return pictureMapper.getById(id);
     }
 
@@ -22,7 +22,8 @@ public class PictureService {
         return pictureMapper.getList();
     }
 
-    public int createPicture(String coverPictures, String title, String introduce, String userName, String category, Integer width, Integer height, Integer size) {
+    public int createPicture(String coverPictures, String title, String introduce, String userName,
+                             String category, Integer width, Integer height, Integer size) {
         int timestamp = (int) (System.currentTimeMillis() / 1000);
         Picture picture = new Picture();
         picture.setCoverPictures(coverPictures);
@@ -39,7 +40,8 @@ public class PictureService {
         return pictureMapper.insert(picture);
     }
 
-    public int updatePicture(BigInteger id, String coverPictures, String title, String introduce, String userName, String category, Integer width, Integer height, Integer size) {
+    public int updatePicture(Long id, String coverPictures, String title, String introduce, String userName,
+                             String category, Integer width, Integer height, Integer size) {
         int timestamp = (int) (System.currentTimeMillis() / 1000);
         Picture picture = new Picture();
         picture.setId(id);
@@ -55,9 +57,8 @@ public class PictureService {
         return pictureMapper.update(picture);
     }
 
-    public int deletePicture(BigInteger id) {
+    public int deletePicture(Long id) {
         return pictureMapper.delete(id, (int) System.currentTimeMillis() / 1000);
     }
-
 
 }

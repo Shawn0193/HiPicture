@@ -14,7 +14,7 @@ import java.util.List;
 public interface PictureMapper {
 
     @Select("select * from picture where id = #{id} and is_deleted = 0")
-    Picture getById(@Param("id") BigInteger id);
+    Picture getById(@Param("id") Long id);
 
     @Select("select * from picture where is_deleted = 0")
     List<Picture> getList();
@@ -24,5 +24,5 @@ public interface PictureMapper {
     int insert(@Param("picture") Picture picture);
 
     @Update("update picture set is_deleted=1, update_time=#{time} where id=#{id} limit 1")
-    int delete(@Param("id") BigInteger id, @Param("time") Integer time);
+    int delete(@Param("id") Long id, @Param("time") Integer time);
 }

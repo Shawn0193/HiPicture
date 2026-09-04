@@ -1,7 +1,7 @@
 package com.baidu.hipicture.app.controller;
 
 import com.baidu.hipicture.app.domain.PictureInfoVO;
-import com.baidu.hipicture.app.domain.PictureListFeedVo;
+import com.baidu.hipicture.app.domain.PictureListFeedVO;
 import com.baidu.hipicture.app.domain.PictureListVO;
 import com.baidu.hipicture.module.entity.Picture;
 import com.baidu.hipicture.module.service.PictureService;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +22,7 @@ public class PictureController {
     private PictureService pictureService;
 
     @RequestMapping("/picture/info")
-    public PictureInfoVO pictureInfo(@RequestParam(name = "pictureId") BigInteger pictureId) {
+    public PictureInfoVO pictureInfo(@RequestParam(name = "pictureId") Long pictureId) {
         Picture picture = pictureService.getPictureInfoById(pictureId);
         String coverPictures = picture.getCoverPictures();
         List<String> coverPicturesList = new ArrayList<>(Arrays.asList(coverPictures.split("\\$")));
@@ -51,18 +50,17 @@ public class PictureController {
     public PictureListVO getAllPictureList() {
         List<Picture> picture = pictureService.getAllPictureList();
         PictureListVO pictureListVO = new PictureListVO();
-        List<PictureListFeedVo> pictureListFeedVos = new ArrayList<>();
+        List<PictureListFeedVO> pictureListFeedVOS = new ArrayList<>();
         for (Picture picture1 : picture) {
-            PictureListFeedVo pictureListFeedVo = new PictureListFeedVo();
+            PictureListFeedVO pictureListFeedVo = new PictureListFeedVO();
             pictureListFeedVo.setPictureId(picture1.getId());
             pictureListFeedVo.setPictureUrl(picture1.getCoverPictures().split("\\$")[0]);
             pictureListFeedVo.setPictureName(picture1.getTitle());
-            pictureListFeedVos.add(pictureListFeedVo);
-            pictureListVO.setList(pictureListFeedVos);
+            pictureListFeedVOS.add(pictureListFeedVo);
+            pictureListVO.setList(pictureListFeedVOS);
         }
 
         return pictureListVO;
     }
-
 
 }

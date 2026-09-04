@@ -31,7 +31,7 @@ public class PictureController {
     }
 
     @RequestMapping("/picture/update")
-    public String studentUpdate(@RequestParam(name = "pictureId") BigInteger pictureId,
+    public String studentUpdate(@RequestParam(name = "pictureId") Long pictureId,
                                 @RequestParam(name = "coverPictures") String coverPictures,
                                 @RequestParam(name = "title") String title,
                                 @RequestParam(name = "introduce") String introduce,
@@ -45,7 +45,7 @@ public class PictureController {
     }
 
     @RequestMapping("/picture/delete")
-    public String studentDelete(@RequestParam(name = "pictureId") BigInteger pictureId) {
+    public String studentDelete(@RequestParam(name = "pictureId") Long pictureId) {
         int result = pictureService.deletePicture(pictureId);
         return result == 1 ? "成功" : "失败";
     }
