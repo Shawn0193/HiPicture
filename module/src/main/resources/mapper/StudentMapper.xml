@@ -2,26 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baidu.hipicture.module.mapper.PictureMapper">
 
-    <insert id="insert" parameterType="com.baidu.hipicture.module.entity.Picture">
-        insert into picture (cover_pictures, title, introduce, user_name, category, width, height, size, create_time,
-                             update_time, is_deleted)
-        values (#{picture.coverPictures}, #{picture.title}, #{picture.introduce}, #{picture.userName},
-                #{picture.category},
-                #{picture.width}, #{picture.height}, #{picture.size}, #{picture.createTime}, #{picture.updateTime},
-                #{picture.isDeleted})
+    <insert id="insert" parameterType="com.baidu.hipicture.module.entity.Picture" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO picture
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            title,
+            cover_pictures,
+            <if test="picture.introduce != null and picture.introduce != ''">introduce,</if>
+            <if test="picture.userName != null and picture.userName != ''">user_name,</if>
+            <if test="picture.category != null and picture.category != ''">category,</if>
+            <if test="picture.width != null">width,</if>
+            <if test="picture.height != null">height,</if>
+            <if test="picture.size != null">size,</if>
+            <if test="picture.createTime != null">create_time,</if>
+            <if test="picture.updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            #{picture.title},
+            #{picture.coverPictures},
+            <if test="picture.introduce != null and picture.introduce != ''">#{picture.introduce},</if>
+            <if test="picture.userName != null and picture.userName != ''">#{picture.userName},</if>
+            <if test="picture.category != null and picture.category != ''">#{picture.category},</if>
+            <if test="picture.width != null">#{picture.width},</if>
+            <if test="picture.height != null">#{picture.height},</if>
+            <if test="picture.size != null">#{picture.size},</if>
+            <if test="picture.createTime != null">#{picture.createTime},</if>
+            <if test="picture.updateTime != null">#{picture.updateTime},</if>
+        </trim>
     </insert>
 
     <update id="update" parameterType="com.baidu.hipicture.module.entity.Picture">
         update picture
-        set cover_pictures = #{picture.coverPictures},
-            title         = #{picture.title},
-            introduce     = #{picture.introduce},
-            user_name      = #{picture.userName},
-            category      = #{picture.category},
-            width         = #{picture.width},
-            height        = #{picture.height},
-            size          = #{picture.size},
-            update_time   = #{picture.updateTime}
+        <set>
+            <if test="picture.coverPictures != null">cover_pictures = #{picture.coverPictures},</if>
+            <if test="picture.title != null and picture.title != ''">title = #{picture.title},</if>
+            <if test="picture.introduce != null and picture.introduce != ''">introduce = #{picture.introduce},</if>
+            <if test="picture.userName != null and picture.userName != ''">user_name = #{picture.userName},</if>
+            <if test="picture.category != null and picture.category != ''">category = #{picture.category},</if>
+            <if test="picture.width != null">width = #{picture.width},</if>
+            <if test="picture.height != null">height = #{picture.height},</if>
+            <if test="picture.size != null">size = #{picture.size},</if>
+            <if test="picture.updateTime != null">update_time = #{picture.updateTime},</if>
+        </set>
         where id = #{picture.id}
     </update>
 

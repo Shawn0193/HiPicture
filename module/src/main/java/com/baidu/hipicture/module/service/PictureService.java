@@ -22,7 +22,7 @@ public class PictureService {
         return pictureMapper.getList();
     }
 
-    public int createPicture(String coverPictures, String title, String introduce, String userName,
+    public Long createPicture(String coverPictures, String title, String introduce, String userName,
                              String category, Integer width, Integer height, Integer size) {
         int timestamp = (int) (System.currentTimeMillis() / 1000);
         Picture picture = new Picture();
@@ -37,7 +37,8 @@ public class PictureService {
         picture.setCreateTime(timestamp);
         picture.setUpdateTime(timestamp);
         picture.setIsDeleted(0);
-        return pictureMapper.insert(picture);
+        pictureMapper.insert(picture);
+        return picture.getId();
     }
 
     public int updatePicture(Long id, String coverPictures, String title, String introduce, String userName,
