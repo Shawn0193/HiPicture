@@ -19,10 +19,16 @@ public interface PictureMapper {
     @Select("select * from picture where is_deleted = 0")
     List<Picture> getList();
 
+    @Select("select count(*) from picture where is_deleted = 0")
+    long getTotal();
+
     int update(@Param("picture") Picture picture);
 
     int insert(@Param("picture") Picture picture);
 
     @Update("update picture set is_deleted=1, update_time=#{time} where id=#{id} limit 1")
     int delete(@Param("id") Long id, @Param("time") Integer time);
+
+    @Select("select * from picture where is_deleted = 0 order by id limit #{offset},#{pageSize}")
+    List<Picture> getPage(@Param("offset") Integer offset, @Param("pageSize") Integer pageSize);
 }

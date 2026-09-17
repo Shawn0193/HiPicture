@@ -1,5 +1,7 @@
 package com.baidu.hipicture.console.controller;
 
+import com.baidu.hipicture.module.domain.PictureInfoVO;
+import com.baidu.hipicture.module.domain.PictureListVO;
 import com.baidu.hipicture.module.service.PictureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,16 @@ public class PictureController {
     @Autowired
     private PictureService pictureService;
 
+    @RequestMapping("/picture/list")
+    public PictureListVO getAllPictureList(@RequestParam(name = "page") Integer page) {
+       Integer pageSize = 10;
+        return pictureService.getPicturePage(page,pageSize);
+    }
+
+    @RequestMapping("/picture/info")
+    public PictureInfoVO getPictureInfo(@RequestParam(name = "id") Long id) {
+        return pictureService.getPictureInfo(id);
+    }
 
     @RequestMapping("/picture/create")
     public String studentCreate(@RequestParam(name = "coverPictures", required = false) String coverPictures,

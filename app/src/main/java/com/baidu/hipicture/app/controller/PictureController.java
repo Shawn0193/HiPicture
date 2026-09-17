@@ -47,8 +47,8 @@ public class PictureController {
     }
 
     @RequestMapping("/picture/list")
-    public PictureListVO getAllPictureList() {
-        List<Picture> picture = pictureService.getAllPictureList();
+    public PictureListVO getAllPictureList(@RequestParam(name = "page") Integer page) {
+        List<Picture> picture = pictureService.getAllPictureList(page);
         PictureListVO pictureListVO = new PictureListVO();
         List<PictureListFeedVO> pictureListFeedVOS = new ArrayList<>();
         for (Picture picture1 : picture) {
