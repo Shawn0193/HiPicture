@@ -48,8 +48,12 @@ public class PictureController {
 
     @RequestMapping("/picture/list")
     public PictureListVO getAllPictureList(@RequestParam(name = "page") Integer page) {
-        List<Picture> picture = pictureService.getAllPictureList(page);
+        Integer pageSize = 10;
         PictureListVO pictureListVO = new PictureListVO();
+        List<Picture> picture = pictureService.getPicturePage(page, pageSize);
+        if (picture == null || picture.isEmpty()) {
+            pictureListVO.setIsEnd(true);
+        }
         List<PictureListFeedVO> pictureListFeedVOS = new ArrayList<>();
         for (Picture picture1 : picture) {
             PictureListFeedVO pictureListFeedVo = new PictureListFeedVO();

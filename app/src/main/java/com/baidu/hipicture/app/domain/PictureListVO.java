@@ -10,4 +10,5 @@ import java.util.List;
 public class PictureListVO {
 
     private List<PictureListFeedVO> list;
+    private Boolean isEnd = false;
 }
