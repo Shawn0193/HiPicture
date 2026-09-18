@@ -1,4 +1,4 @@
-package com.baidu.hipicture.module.domain;
+package com.baidu.hipicture.console.domain;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

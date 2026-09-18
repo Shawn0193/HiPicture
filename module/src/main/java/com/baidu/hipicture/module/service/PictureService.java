@@ -1,8 +1,6 @@
 package com.baidu.hipicture.module.service;
 
-import com.baidu.hipicture.module.domain.PictureInfoVO;
-import com.baidu.hipicture.module.domain.PictureListFeedVO;
-import com.baidu.hipicture.module.domain.PictureListVO;
+
 import com.baidu.hipicture.module.entity.Picture;
 import com.baidu.hipicture.module.mapper.PictureMapper;
 import org.springframework.beans.BeanUtils;
@@ -29,13 +27,11 @@ public class PictureService {
     }
 
     public List<Picture> getAllPictureList(Integer page) {
-        Long total = pictureMapper.getTotal();
-
-        return  pictureMapper.getList();
+        return pictureMapper.getList();
     }
 
     public Long createPicture(String coverPictures, String title, String introduce, String userName,
-                             String category, Integer width, Integer height, Integer size) {
+                              String category, Integer width, Integer height, Integer size) {
         int timestamp = (int) (System.currentTimeMillis() / 1000);
         Picture picture = new Picture();
         picture.setCoverPictures(coverPictures);
@@ -74,61 +70,15 @@ public class PictureService {
         return pictureMapper.delete(id, (int) System.currentTimeMillis() / 1000);
     }
 
-    public PictureListVO getPicturePage(Integer page, Integer pageSize) {
-        long total = pictureMapper.getTotal();
+    public List<Picture> getPicturePage(Integer page, Integer pageSize) {
         Integer offset = (page - 1) * pageSize;
         List<Picture> pictureList = pictureMapper.getPage(offset, pageSize);
-        List<PictureListFeedVO> pictureListFeedVOS = new ArrayList<>();
-        for (Picture picture : pictureList) {
-            PictureListFeedVO pictureListFeedVO = new PictureListFeedVO();
-            pictureListFeedVO.setPictureId(picture.getId());
-            pictureListFeedVO.setPictureUrl(picture.getCoverPictures().split("\\$")[0]);
-            pictureListFeedVO.setPictureName(picture.getTitle());
-            pictureListFeedVOS.add(pictureListFeedVO);
-        }
-        PictureListVO  pictureListVO = new PictureListVO();
-        pictureListVO.setTotal(total);
-        pictureListVO.setList(pictureListFeedVOS);
-        pictureListVO.setPageSize(pageSize);
 
-        return pictureListVO;
+        return pictureList;
     }
 
-    public PictureInfoVO getPictureInfo(Long id) {
-        Picture picture = pictureMapper.getById(id);
-        String coverPictures = picture.getCoverPictures();
-        List<String> coverPicturesList = new ArrayList<>(Arrays.asList(coverPictures.split("\\$")));
-        String title = picture.getTitle();
-        String introduce = picture.getIntroduce();
-        String userName = picture.getUserName();
-        String category = picture.getCategory();
-        Integer width = picture.getWidth();
-        Integer height = picture.getHeight();
-        Integer size = picture.getSize();
-        Integer createTime = picture.getCreateTime();
-        Integer updateTime = picture.getUpdateTime();
-        PictureInfoVO pictureInfoVO = new PictureInfoVO();
-        pictureInfoVO.setCoverPictures(coverPicturesList);
-        pictureInfoVO.setTitle(title);
-        pictureInfoVO.setIntroduce(introduce);
-        pictureInfoVO.setUserName(userName);
-        pictureInfoVO.setCategory(category);
-        pictureInfoVO.setWidth(width);
-        pictureInfoVO.setHeight(height);
-        pictureInfoVO.setSize(size);
-        String createTimeString = LocalDateTime.ofInstant(
-                Instant.ofEpochSecond(createTime),
-                ZoneId.of("Asia/Shanghai")
-        ).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        String updateTimeString = LocalDateTime.ofInstant(
-                Instant.ofEpochSecond(createTime),
-                ZoneId.of("Asia/Shanghai")
-        ).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        pictureInfoVO.setCreateTime(createTimeString);
-        pictureInfoVO.setUpdateTime(updateTimeString);
-
-        return pictureInfoVO;
+    public Long getTotal() {
+        return pictureMapper.getTotal();
     }
-
 
 }

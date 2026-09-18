@@ -1,6 +1,5 @@
-package com.baidu.hipicture.module.domain;
+package com.baidu.hipicture.console.domain;
 
-import com.baidu.hipicture.module.domain.PictureListFeedVO;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
